@@ -1,0 +1,7 @@
+C:\Users\Admin\source\repos\StackMath\StackMath\bin\Debug\StackMath.pdb
+C:\Users\Admin\source\repos\StackMath\StackMath\obj\Debug\StackMath.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\StackMath\StackMath\obj\Debug\StackMath.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\StackMath\StackMath\obj\Debug\StackMath.pdb
+C:\Users\Admin\source\repos\StackMath\StackMath\bin\Debug\StackMath.dll.config
+C:\Users\Admin\source\repos\StackMath\StackMath\bin\Debug\StackMath.dll
+C:\Users\Admin\source\repos\StackMath\StackMath\obj\Debug\StackMath.dll

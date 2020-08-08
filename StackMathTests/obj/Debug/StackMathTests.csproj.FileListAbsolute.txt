@@ -1,0 +1,17 @@
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\StackMathTests.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\StackMathTests.pdb
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\StackMath.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\StackMath.pdb
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\StackMath.dll.config
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Admin\source\repos\StackMath\StackMathTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Admin\source\repos\StackMath\StackMathTests\obj\Debug\StackMathTests.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\StackMath\StackMathTests\obj\Debug\StackMathTests.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\StackMath\StackMathTests\obj\Debug\StackMathTests.csproj.CopyComplete
+C:\Users\Admin\source\repos\StackMath\StackMathTests\obj\Debug\StackMathTests.dll
+C:\Users\Admin\source\repos\StackMath\StackMathTests\obj\Debug\StackMathTests.pdb
