@@ -95,5 +95,11 @@ namespace StackMath.Tests
         {
             Assert.AreEqual(Math.Pow(17, Math.Cos(0)), i.Interpret("17^cos(0)"));
         }
+
+        [TestMethod()]
+        public void ConstantTest0()
+        {
+            Assert.AreEqual(Math.Sin(Math.PI/6), i.Interpret("sin(pi/6)"));
+        }
     }
 }

@@ -31,11 +31,19 @@ namespace StackMath
             {"cos", new CosFunction() },
         };
 
+        readonly Dictionary<string, Instruction> constants = new Dictionary<string, Instruction>()
+        {
+            {"pi", new PushInstruction(Math.PI) },
+            {"e", new PushInstruction(Math.E) },
+        };
+
+        Dictionary<string, Instruction> instructions => operators.Union(functions).Union(constants).ToDictionary(k => k.Key, v => v.Value);
+
         public List<Instruction> Analyze(string input)
         {
             string regex = @"([*()\^\/]|(?<!E)[\+\-])";
             string[] tokens = Regex.Split(input, regex).ToList().Where(x => x != " " && x != "").ToArray();
-            List<Instruction> inst = tokens.Select(x => x.GetToken(operators.Union(functions).ToDictionary(k => k.Key, v => v.Value))).ToList();
+            List<Instruction> inst = tokens.Select(x => x.GetToken(instructions)).ToList();
             for (int i = 0; i < inst.Count; i++)
                 inst[i] = UnaryMinusCheck(inst[i], i == 0 ? null : inst[i - 1]);
             return inst;
