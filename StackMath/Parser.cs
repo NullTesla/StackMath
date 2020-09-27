@@ -20,9 +20,17 @@ namespace StackMath
             return temp;
         }
 
+        //See the Shunting-yard algorithm for more information
         private void ParseIteration(Instruction inst,Stack<Instruction> stack, List<Instruction> instructions)
         {
-            if (inst is RightBracketInstruction)
+            if (inst is Functions.Function)
+                stack.Push(inst);
+            else if (inst is Separator)
+            {
+                while (!(stack.Peek() is RightBracket))
+                    instructions.Add(stack.Pop());
+            }
+            else if (inst is RightBracket)
                 ClosingBracket(ref instructions, ref stack);
             else if (inst is PushInstruction)
             {
@@ -30,7 +38,7 @@ namespace StackMath
             }
             else
             {
-                while (stack.Count > 0 && !(inst is LeftBracketInstruction) && (stack.Peek().Priority > inst.Priority || (stack.Peek().Priority == inst.Priority && inst.LeftAssociative)))
+                while (stack.Count > 0 && !(inst is LeftBracket) && (stack.Peek().Priority > inst.Priority || (stack.Peek().Priority == inst.Priority && inst.LeftAssociative)))
                     instructions.Add(stack.Pop());
                 stack.Push(inst);
             }
@@ -43,7 +51,7 @@ namespace StackMath
             {
                 if (buffer.Count == 0)
                     throw new ArgumentException("Invalid input string");
-                if (!(buffer.Peek() is LeftBracketInstruction))
+                if (!(buffer.Peek() is LeftBracket))
                     instructions.Add(buffer.Pop());
                 else
                 {

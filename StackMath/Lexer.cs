@@ -1,4 +1,5 @@
-﻿using StackMath.Instructions;
+﻿using StackMath.Functions;
+using StackMath.Instructions;
 using StackMath.Instructions.Math;
 using System;
 using System.Collections.Generic;
@@ -12,21 +13,29 @@ namespace StackMath
 {
     public class Lexer : Interfaces.ILexer
     {
-        readonly ReadOnlyDictionary<char, Instruction> operators = new ReadOnlyDictionary<char, Instruction>(new Dictionary<char, Instruction>
+        readonly Dictionary<string, Instruction> operators = new Dictionary<string, Instruction>()
         {
-            {'+', new AddInstruction() },
-            {'-', new SubInstruction() },
-            {'*', new MulInstruction() },
-            {'/', new DivInstruction() },
-            {'^', new PowInstruction() },
-            {'(', new LeftBracketInstruction() },
-            {')', new RightBracketInstruction() }
-        });
+            {"+", new AddInstruction() },
+            {"-", new SubInstruction() },
+            {"*", new MulInstruction() },
+            {"/", new DivInstruction() },
+            {"^", new PowInstruction() },
+            {"(", new LeftBracket() },
+            {")", new RightBracket() },
+            { ",", new Separator() }
+        };
+
+        readonly Dictionary<string, Instruction> functions = new Dictionary<string, Instruction>()
+        {
+            {"sin", new SinFunction() },
+            {"cos", new CosFunction() },
+        };
 
         public List<Instruction> Analyze(string input)
         {
-            string[] tokens = Regex.Split(input, @"([*()\^\/]|(?<!E)[\+\-])").ToList().Where(x => x != " " && x != "").ToArray();
-            List<Instruction> inst = tokens.Select(x => x.GetToken(operators)).ToList();
+            string regex = @"([*()\^\/]|(?<!E)[\+\-])";
+            string[] tokens = Regex.Split(input, regex).ToList().Where(x => x != " " && x != "").ToArray();
+            List<Instruction> inst = tokens.Select(x => x.GetToken(operators.Union(functions).ToDictionary(k => k.Key, v => v.Value))).ToList();
             for (int i = 0; i < inst.Count; i++)
                 inst[i] = UnaryMinusCheck(inst[i], i == 0 ? null : inst[i - 1]);
             return inst;

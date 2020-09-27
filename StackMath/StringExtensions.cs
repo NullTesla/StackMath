@@ -10,14 +10,14 @@ namespace StackMath
 {
     public static class StringExtensions
     {
-        public static Instruction GetToken(this string s, IDictionary<char, Instruction> operators)
+        public static Instruction GetToken(this string s, IDictionary<string, Instruction> operators)
         {
             double d;
             if (double.TryParse(s, out d))
                 return new PushInstruction(d);
             else
             {
-                return operators[s[0]];
+                return operators[s];
             }
         }
     }

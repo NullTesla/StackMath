@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StackMath.Instructions
 {
-    public abstract class Function : Instruction
+    public class Separator : SecondaryInstruction
     {
     }
 }

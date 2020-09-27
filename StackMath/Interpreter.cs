@@ -25,7 +25,7 @@ namespace StackMath
         {
             Stack<double> stack = new Stack<double>();
             List<Instruction> instructions = Parser.Parse(Lexer.Analyze(input));
-            if (instructions.Any(x => x is LeftBracketInstruction || x is RightBracketInstruction))
+            if (instructions.Any(x => x is LeftBracket || x is RightBracket))
                 throw new ArgumentException("Invalid input string");
             instructions.ForEach(x => x.Execute(stack));
             return stack.Count > 1 ? throw new ArgumentException("Invalid input string") : stack.Pop();

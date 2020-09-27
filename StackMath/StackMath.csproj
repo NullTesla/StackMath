@@ -47,12 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context.cs" />
-    <Compile Include="Instructions\Function.cs" />
-    <Compile Include="Instructions\RightBracketInstruction.cs" />
+    <Compile Include="Functions\CosFunction.cs" />
+    <Compile Include="Functions\Function.cs" />
+    <Compile Include="Functions\SinFunction.cs" />
+    <Compile Include="Functions\TanFunction.cs" />
+    <Compile Include="Instructions\RightBracket.cs" />
+    <Compile Include="Instructions\Separator.cs" />
+    <Compile Include="Instructions\SecondaryInstruction.cs" />
     <Compile Include="Interfaces\ILexer.cs" />
     <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="Instructions\Math\AddInstruction.cs" />
-    <Compile Include="Instructions\LeftBracketInstruction.cs" />
+    <Compile Include="Instructions\LeftBracket.cs" />
     <Compile Include="Instructions\Math\DivInstruction.cs" />
     <Compile Include="Instructions\Instruction.cs" />
     <Compile Include="Instructions\Math\MathInstruction.cs" />

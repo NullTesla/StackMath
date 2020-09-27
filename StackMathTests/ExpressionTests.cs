@@ -71,5 +71,29 @@ namespace StackMath.Tests
         {
             Assert.AreEqual(-4, i.Interpret("-2^2"));
         }
+
+        [TestMethod()]
+        public void FunctionTest0()
+        {
+            Assert.AreEqual(1, i.Interpret("sin(1)^2+cos(1)^2"));
+        }
+
+        [TestMethod()]
+        public void FunctionTest1()
+        {
+            Assert.AreEqual(Math.Sin(2+3), i.Interpret("sin(2)*cos(3)+cos(2)*sin(3)"));
+        }
+
+        [TestMethod()]
+        public void FunctionTest2()
+        {
+            Assert.AreEqual(Math.Tan(5), i.Interpret("sin(5)/cos(5)"));
+        }
+
+        [TestMethod()]
+        public void FunctionTest3()
+        {
+            Assert.AreEqual(Math.Pow(17, Math.Cos(0)), i.Interpret("17^cos(0)"));
+        }
     }
 }
