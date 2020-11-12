@@ -23,7 +23,7 @@ namespace StackMath.Functions
         private double[] GetArgs(Stack<double> stack)
         {
             double[] temp = new double[ArgsCount];
-            for (int i = 0; i < ArgsCount; ++i)
+            for (int i = ArgsCount-1; i >= 0; --i)
                 temp[i] = stack.Pop();
             return temp;
         }

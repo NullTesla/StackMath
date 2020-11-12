@@ -97,9 +97,47 @@ namespace StackMath.Tests
         }
 
         [TestMethod()]
+        public void FunctionTest4()
+        {
+            Assert.AreEqual(3, i.Interpret("log(8, 2)"));
+        }
+
+        [TestMethod()]
         public void ConstantTest0()
         {
             Assert.AreEqual(Math.Sin(Math.PI/6), i.Interpret("sin(pi/6)"));
+        }
+
+        [TestMethod()]
+        public void VariablesTest0()
+        {
+            i.Interpret("a = 5");
+            i.Interpret("b = 3");
+            Assert.AreEqual(8, i.Interpret("a + b"));
+        }
+
+        [TestMethod()]
+        public void VariablesTest1()
+        {
+            i.Interpret("a = sin(pi/4)");
+            i.Interpret("b = 2^(1/2)");
+            Assert.AreEqual(1, i.Interpret("a * b"));
+        }
+
+        [TestMethod()]
+        public void VariablesTest2()
+        {
+            i.Interpret("a = cos(0)");
+            i.Interpret("b = a");
+            Assert.AreEqual(0, i.Interpret("a - b"));
+        }
+
+        [TestMethod()]
+        public void VariablesTest3()
+        {
+            i.Interpret("a = cos(0)");
+            i.Interpret("b = a - 6");
+            Assert.AreEqual(6, i.Interpret("a - b"));
         }
     }
 }

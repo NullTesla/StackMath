@@ -13,7 +13,7 @@ namespace StackMath.Instructions
 
         public override void Execute(Stack<double> stack)
         {
-            throw new ArgumentException();
+            //throw new ArgumentException();
         }
     }
 }

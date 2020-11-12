@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using StackMath.Instructions;
+using StackMath.Instructions.Math;
 using StackMath.Interfaces;
 
 namespace StackMath
@@ -12,6 +13,8 @@ namespace StackMath
             List<Instruction> temp = new List<Instruction>();
             Stack<Instruction> buffer = new Stack<Instruction>();
 
+            for (int i = 0; i < tokens.Count; ++i)
+                tokens[i] = PredictOperator(i - 1 < 0 ? null : tokens[i - 1], tokens[i], i + 1 >= tokens.Count ? null : tokens[i+1]);
             foreach(Instruction token in tokens)
                 ParseIteration(token, buffer, temp);
             while (buffer.Count > 0)
@@ -21,18 +24,18 @@ namespace StackMath
         }
 
         //See the Shunting-yard algorithm for more information
-        private void ParseIteration(Instruction inst,Stack<Instruction> stack, List<Instruction> instructions)
+        private void ParseIteration(Instruction inst, Stack<Instruction> stack, List<Instruction> instructions)
         {
             if (inst is Functions.Function)
                 stack.Push(inst);
             else if (inst is Separator)
             {
-                while (!(stack.Peek() is RightBracket))
+                while (!(stack.Peek() is LeftBracket))
                     instructions.Add(stack.Pop());
             }
             else if (inst is RightBracket)
-                ClosingBracket(ref instructions, ref stack);
-            else if (inst is PushInstruction)
+                ClosingBracket(instructions, stack);
+            else if (inst is PushInstruction || inst is GetVariable || inst is Equal)
             {
                 instructions.Add(inst);
             }
@@ -44,7 +47,7 @@ namespace StackMath
             }
         }
 
-        private void ClosingBracket(ref List<Instruction> instructions, ref Stack<Instruction> buffer)
+        private void ClosingBracket(List<Instruction> instructions, Stack<Instruction> buffer)
         {
             bool IsBracketFound = false;
             while (!IsBracketFound)
@@ -62,6 +65,19 @@ namespace StackMath
 
             if (!IsBracketFound)
                 throw new ArgumentException("Invalid input string");
+        }
+
+        private Instruction PredictOperator(Instruction previous, Instruction inst, Instruction next)
+        {
+            
+            bool IsSub = inst is SubInstruction;
+            bool IsNegative = previous == null || !(previous is PushInstruction || previous is GetVariable);
+            if (IsSub && IsNegative)
+                inst = new NegativeInstruction();
+            if (next is Equal && inst is GetVariable)
+                inst = new SetVariable(inst as GetVariable);
+
+            return inst;
         }
     }
 }

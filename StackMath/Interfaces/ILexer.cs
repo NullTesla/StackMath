@@ -9,6 +9,6 @@ namespace StackMath.Interfaces
 {
     public interface ILexer
     {
-        List<Instruction> Analyze(string input);
+        List<Instruction> Analyze(string input, Context context);
     }
 }

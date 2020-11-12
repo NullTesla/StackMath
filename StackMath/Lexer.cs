@@ -22,13 +22,16 @@ namespace StackMath
             {"^", new PowInstruction() },
             {"(", new LeftBracket() },
             {")", new RightBracket() },
-            { ",", new Separator() }
+            {",", new Separator() },
+            {"=", new Equal() },
         };
 
         readonly Dictionary<string, Instruction> functions = new Dictionary<string, Instruction>()
         {
             {"sin", new SinFunction() },
             {"cos", new CosFunction() },
+            {"tan", new TanFunction() },
+            {"log", new LogFunction() }
         };
 
         readonly Dictionary<string, Instruction> constants = new Dictionary<string, Instruction>()
@@ -39,23 +42,25 @@ namespace StackMath
 
         Dictionary<string, Instruction> instructions => operators.Union(functions).Union(constants).ToDictionary(k => k.Key, v => v.Value);
 
-        public List<Instruction> Analyze(string input)
+        public List<Instruction> Analyze(string input, Context context)
         {
-            string regex = @"([*()\^\/]|(?<!E)[\+\-])";
-            string[] tokens = Regex.Split(input, regex).ToList().Where(x => x != " " && x != "").ToArray();
-            List<Instruction> inst = tokens.Select(x => x.GetToken(instructions)).ToList();
-            for (int i = 0; i < inst.Count; i++)
-                inst[i] = UnaryMinusCheck(inst[i], i == 0 ? null : inst[i - 1]);
+            string regex = @"([*()\^\/]|(?<!E)[\+\-\,\=])";
+            string[] tokens = Regex.Split(input.Replace(" ", ""), regex).ToList().Where(x => x != " " && x != "").ToArray();
+            List<Instruction> inst = tokens.Select(x => GetToken(x, instructions, context)).ToList();
             return inst;
         }
 
-        private static Instruction UnaryMinusCheck(Instruction inst, Instruction previous)
+        private Instruction GetToken(string s, IDictionary<string, Instruction> operators, Context context)
         {
-            bool IsSub = inst is SubInstruction;
-            bool IsNegative = previous == null || !(previous is PushInstruction);
-            if (IsSub && IsNegative)
-                inst = new NegativeInstruction();
-            return inst;
+            double d;
+            if (double.TryParse(s, out d))
+                return new PushInstruction(d);
+            else if (operators.ContainsKey(s))
+            {
+                return operators[s];
+            }
+            else
+                return new GetVariable(context, s);
         }
     }
 }
